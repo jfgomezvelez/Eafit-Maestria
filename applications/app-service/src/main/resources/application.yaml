@@ -12,3 +12,7 @@ spring:
       path: /h2
   profiles:
     include:
+
+visualcrossing:
+  url: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
+  key: 46URCCVEEGS7DWZVRU7ML9FK2

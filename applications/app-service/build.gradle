@@ -1,6 +1,7 @@
 apply plugin: 'org.springframework.boot'
 
 dependencies {
+	implementation project(':visual-crossing-weather')
 	implementation project(':reactive-web')
 	implementation project(':weather-gcp')
     implementation project(':model')
