@@ -1,12 +1,19 @@
 package co.edu.eafit.model;
 
-public class StationBase {
-    public double distance;
-    public double latitude;
-    public double longitude;
-    public int useCount;
-    public String id;
-    public String name;
-    public int quality;
-    public double contribution;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@SuperBuilder
+@Data
+public abstract class StationBase {
+    private double distance;
+    private double latitude;
+    private double longitude;
+    private int useCount;
+    private String id;
+    private String name;
+    private int quality;
+    private double contribution;
 }

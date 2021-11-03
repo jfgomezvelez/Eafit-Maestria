@@ -1,31 +1,38 @@
 package co.edu.eafit.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
 public class Hour {
-    public String datetime;
-    public int datetimeEpoch;
-    public double temp;
-    public double feelslike;
-    public double humidity;
-    public double dew;
-    public double precip;
-    public double precipprob;
-    public double snow;
-    public double snowdepth;
-    public List<String> preciptype;
-    public double windgust;
-    public double windspeed;
-    public double winddir;
-    public double pressure;
-    public double visibility;
-    public double cloudcover;
-    public double solarradiation;
-    public double solarenergy;
-    public double uvindex;
-    public String conditions;
-    public String icon;
-    public List<String> stations;
-    public String source;
-    public double severerisk;
+    private final String datetime;
+    private final int datetimeEpoch;
+    private final double temp;
+    private final double feelslike;
+    private final double humidity;
+    private final double dew;
+    private final double precip;
+    private final double precipprob;
+    private final double snow;
+    private final double snowdepth;
+    private final List<String> preciptype;
+    private final double windgust;
+    private final double windspeed;
+    private final double winddir;
+    private final double pressure;
+    private final double visibility;
+    private final double cloudcover;
+    private final double solarradiation;
+    private final double solarenergy;
+    private final double uvindex;
+    private final String conditions;
+    private final String icon;
+    private final List<String> stations;
+    private final String source;
+    private final double severerisk;
 }
