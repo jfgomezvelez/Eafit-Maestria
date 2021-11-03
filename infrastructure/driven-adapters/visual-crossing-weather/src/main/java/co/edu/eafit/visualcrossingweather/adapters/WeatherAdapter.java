@@ -55,7 +55,7 @@ public class WeatherAdapter implements WeatherRepository {
 
     private URI createURL(String location) {
         return UriComponentsBuilder
-                .fromUriString(url.concat(location).concat("?unitGroup=us&key=").concat(key))
+                .fromUriString(url.concat(location).concat("?unitGroup=metric&key=").concat(key))
                 .build()
                 .toUri();
     }
