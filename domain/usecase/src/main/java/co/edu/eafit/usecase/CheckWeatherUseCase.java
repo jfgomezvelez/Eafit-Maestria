@@ -1,16 +1,41 @@
 package co.edu.eafit.usecase;
 
-import co.edu.eafit.model.Weather;
-import co.edu.eafit.model.gateway.WeatherRepository;
+import co.edu.eafit.model.statistic.FeatureType;
+import co.edu.eafit.model.statistic.ProcessType;
+import co.edu.eafit.model.weather.gateway.WeatherRepository;
+import co.edu.eafit.model.statistic.gateway.StatisticRepository;
+import co.edu.eafit.model.statistic.Process;
+import co.edu.eafit.model.weather.Weather;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class CheckWeatherUseCase {
 
     private final WeatherRepository weatherRepository;
+    private final StatisticRepository statisticRepository;
 
-    public Mono<Weather> checkWeather(String location){
-        return weatherRepository.checkWeather(location);
+    public Mono<Weather> checkWeather(String location) {
+
+        Process processInitial = Process.builder()
+                .initialDate(LocalTime.now())
+                .id(UUID.randomUUID().toString())
+                .traceabilityIdentifier(UUID.randomUUID().toString())
+                .name(ProcessType.CHECKWEATHER.toString())
+                .feature(FeatureType.ONLYHTTP.toString())
+                .build();
+
+        return weatherRepository.checkWeather(location)
+                .flatMap(weather -> {
+                    Process processFinish = processInitial
+                            .toBuilder()
+                            .finishDate(LocalTime.now())
+                            .build();
+                    return statisticRepository.save(processFinish).map(result -> weather);
+                });
     }
 }

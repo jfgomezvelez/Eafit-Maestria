@@ -1,4 +1,4 @@
-package co.edu.eafit.model;
+package co.edu.eafit.model.weather;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +9,6 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @SuperBuilder
-public class SKRG extends StationBase{
+public class F0688 extends StationBase{
 
 }

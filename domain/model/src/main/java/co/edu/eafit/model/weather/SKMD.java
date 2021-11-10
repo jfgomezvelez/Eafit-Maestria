@@ -1,4 +1,4 @@
-package co.edu.eafit.model;
+package co.edu.eafit.model.weather;
 
 import lombok.*;
 import lombok.experimental.SuperBuilder;

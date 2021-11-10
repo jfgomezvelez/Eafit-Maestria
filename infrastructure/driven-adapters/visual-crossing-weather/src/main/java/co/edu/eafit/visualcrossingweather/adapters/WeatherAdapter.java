@@ -1,7 +1,7 @@
 package co.edu.eafit.visualcrossingweather.adapters;
 
-import co.edu.eafit.model.Weather;
-import co.edu.eafit.model.gateway.WeatherRepository;
+import co.edu.eafit.model.weather.gateway.WeatherRepository;
+import co.edu.eafit.model.weather.Weather;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;

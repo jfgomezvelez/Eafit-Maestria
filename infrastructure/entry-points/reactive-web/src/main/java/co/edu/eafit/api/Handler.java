@@ -1,6 +1,5 @@
 package co.edu.eafit.api;
 
-import co.edu.eafit.model.Weather;
 import co.edu.eafit.usecase.CheckWeatherUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

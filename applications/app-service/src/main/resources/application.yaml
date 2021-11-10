@@ -1,18 +1,19 @@
-##Spring Configuration
 server:
   port: 8080
 spring:
   application:
-    name: IntegrationPatterns
+    name: "IntegrationPatterns"
   devtools:
     add-properties: false
   h2:
     console:
       enabled: true
-      path: /h2
+      path: "/h2"
   profiles:
-    include:
-
+    include: null
+  data:
+    mongodb:
+      uri:  ${MONGO_URL}
 visualcrossing:
-  url: https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/
-  key: 46URCCVEEGS7DWZVRU7ML9FK2
+  url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+  key: "46URCCVEEGS7DWZVRU7ML9FK2"
