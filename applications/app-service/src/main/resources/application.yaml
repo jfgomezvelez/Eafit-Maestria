@@ -16,4 +16,4 @@ spring:
       uri:  ${MONGO_URL}
 visualcrossing:
   url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-  key: "46URCCVEEGS7DWZVRU7ML9FK2"
+  key: ${VISUAL_KEY}
