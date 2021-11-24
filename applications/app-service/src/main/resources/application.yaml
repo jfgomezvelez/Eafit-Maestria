@@ -2,7 +2,7 @@ server:
   port: 8080
 spring:
   application:
-    name: "IntegrationPatterns"
+    name: "weather-service"
   devtools:
     add-properties: false
   h2:
@@ -17,3 +17,6 @@ spring:
 visualcrossing:
   url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
   key: ${VISUAL_KEY}
+
+azure:
+  connection-string: ${SB_URL}
