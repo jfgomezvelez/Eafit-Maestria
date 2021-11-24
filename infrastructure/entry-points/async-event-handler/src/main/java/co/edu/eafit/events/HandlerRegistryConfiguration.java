@@ -11,18 +11,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableQueryListeners
 @RequiredArgsConstructor
 public class HandlerRegistryConfiguration {
 
-    private final CheckWeatherUseCase checkWeatherUseCase;
-
-    // see more at: https://reactivecommons.org/reactive-commons-java/#_handlerregistry_2
     @Bean
-    public HandlerRegistry handlerRegistry(/*CommandsHandler commands, QueriesHandler queries*/) {
+    public HandlerRegistry handlerRegistry(CommandsHandler commands, QueriesHandler queries) {
         return HandlerRegistry.register()
                 //.handleCommand("some.command.name", commands::handleCommandA, Object.class/*change for proper model*/)
-                //.serveQuery("weather.query", queries::handleQueryA, WeatherQuery.class/*change for proper model*/);
-                .serveQuery("weather.query", weatherQuery -> checkWeatherUseCase.checkWeather(weatherQuery.getLocation()), WeatherQuery.class/*change for proper model*/);
+                .serveQuery("weather.query", queries::handleQueryA, WeatherQuery.class);
     }
 }
