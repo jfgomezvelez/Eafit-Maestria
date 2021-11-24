@@ -1,5 +1,6 @@
 package co.edu.eafit.usecase;
 
+import co.edu.eafit.model.common.Transformer;
 import co.edu.eafit.model.statistic.FeatureType;
 import co.edu.eafit.model.statistic.ProcessType;
 import co.edu.eafit.model.weather.gateway.WeatherRepository;
@@ -18,6 +19,7 @@ public class CheckWeatherUseCase {
 
     private final WeatherRepository weatherRepository;
     private final StatisticRepository statisticRepository;
+    private final Transformer transformer;
 
     public Mono<Weather> checkWeather(String location) {
 
@@ -34,6 +36,7 @@ public class CheckWeatherUseCase {
                     Process processFinish = processInitial
                             .toBuilder()
                             .finishDate(LocalTime.now())
+                            .dataSize(transformer.toJson(weather).length())
                             .build();
                     return statisticRepository.save(processFinish).map(result -> weather);
                 });
