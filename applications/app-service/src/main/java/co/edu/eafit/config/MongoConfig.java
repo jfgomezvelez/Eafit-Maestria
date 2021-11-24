@@ -1,6 +1,5 @@
 package co.edu.eafit.config;
 
-import co.edu.eafit.mongo.config.MongoDBSecret;
 import org.springframework.boot.autoconfigure.mongo.ReactiveMongoClientFactory;
 import org.springframework.boot.autoconfigure.mongo.MongoClientSettingsBuilderCustomizer;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
