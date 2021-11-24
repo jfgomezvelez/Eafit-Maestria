@@ -1,4 +1,4 @@
-rootProject.name = 'IntegrationPatterns'
+rootProject.name = 'weather-service'
 
 include ':app-service'
 include ':model'
