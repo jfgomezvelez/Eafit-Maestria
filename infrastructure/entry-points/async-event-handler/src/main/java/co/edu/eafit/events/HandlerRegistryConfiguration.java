@@ -17,7 +17,7 @@ public class HandlerRegistryConfiguration {
     @Bean
     public HandlerRegistry handlerRegistry(CommandsHandler commands, QueriesHandler queries) {
         return HandlerRegistry.register()
-                //.handleCommand("some.command.name", commands::handleCommandA, Object.class/*change for proper model*/)
+                .handleCommand("weather.request", commands::handleCommandA, WeatherCommand.class)
                 .serveQuery("weather.query", queries::handleQueryA, WeatherQuery.class);
     }
 }
