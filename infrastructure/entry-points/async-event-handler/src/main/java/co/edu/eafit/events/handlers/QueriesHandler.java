@@ -3,7 +3,6 @@ package co.edu.eafit.events.handlers;
 import co.edu.eafit.events.WeatherQuery;
 import co.edu.eafit.model.weather.Weather;
 import co.edu.eafit.usecase.CheckWeatherUseCase;
-import com.sun.org.apache.xpath.internal.axes.WalkerFactory;
 import lombok.AllArgsConstructor;
 import org.reactivecommons.async.impl.config.annotations.EnableQueryListeners;
 import reactor.core.publisher.Mono;
