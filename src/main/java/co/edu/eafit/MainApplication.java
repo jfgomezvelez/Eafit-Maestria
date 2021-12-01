@@ -1,10 +1,11 @@
 package co.edu.eafit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.apache.log4j.Logger;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.text.NumberFormat;
@@ -17,7 +18,7 @@ public class MainApplication {
         SpringApplication.run(MainApplication.class, args);
     }
 
-    final static Logger logger = Logger.getLogger(MainApplication.class);
+    Logger logger = LoggerFactory.getLogger(MainApplication.class);
 
     @Bean
     public CommandLineRunner memInfoRunner() {
