@@ -4,11 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import reactor.util.Logger;
-import reactor.util.Loggers;
+import org.apache.log4j.Logger;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import java.text.NumberFormat;
 
+@EnableMongoRepositories
 @SpringBootApplication
 public class MainApplication {
 
@@ -16,7 +17,7 @@ public class MainApplication {
         SpringApplication.run(MainApplication.class, args);
     }
 
-    Logger logger = Loggers.getLogger(MainApplication.class);
+    final static Logger logger = Logger.getLogger(MainApplication.class);
 
     @Bean
     public CommandLineRunner memInfoRunner() {

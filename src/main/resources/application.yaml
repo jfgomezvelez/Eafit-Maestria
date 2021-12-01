@@ -17,6 +17,3 @@ spring:
 visualcrossing:
   url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
   key: ${VISUAL_KEY}
-
-azure:
-  connection-string: ${SB_URL}

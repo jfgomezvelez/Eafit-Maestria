@@ -2,7 +2,7 @@ package co.edu.eafit.statistic;
 
 public enum FeatureType {
 
-    ONLYHTTP("OnlyHTTP");
+    BASICONLYHTTP("BasicOnlyHTTP");
 
     private final String type;
 
