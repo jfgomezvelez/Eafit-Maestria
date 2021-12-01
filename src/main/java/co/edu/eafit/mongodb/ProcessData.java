@@ -17,6 +17,14 @@ public class ProcessData {
     private String feature;
     private int dataSize;
 
+    public ProcessData(String id, LocalTime initialDate,  String name, String traceabilityIdentifier, String feature) {
+        this.id = id;
+        this.initialDate = initialDate;
+        this.name = name;
+        this.traceabilityIdentifier = traceabilityIdentifier;
+        this.feature = feature;
+    }
+
     public String getId() {
         return id;
     }
