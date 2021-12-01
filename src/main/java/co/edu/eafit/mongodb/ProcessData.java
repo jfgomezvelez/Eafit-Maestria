@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalTime;
+import java.util.UUID;
 
 @Document(collection = "process")
 public class ProcessData {
@@ -17,11 +18,11 @@ public class ProcessData {
     private String feature;
     private int dataSize;
 
-    public ProcessData(String id, LocalTime initialDate,  String name, String traceabilityIdentifier, String feature) {
-        this.id = id;
+    public ProcessData(LocalTime initialDate,  String name, String feature) {
+        this.id = UUID.randomUUID().toString();
         this.initialDate = initialDate;
         this.name = name;
-        this.traceabilityIdentifier = traceabilityIdentifier;
+        this.traceabilityIdentifier = UUID.randomUUID().toString();
         this.feature = feature;
     }
 

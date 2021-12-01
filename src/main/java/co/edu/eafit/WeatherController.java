@@ -37,14 +37,12 @@ public class WeatherController {
     public String checkWeather(String location) {
 
         ProcessData process = new ProcessData(
-                UUID.randomUUID().toString(),
                 LocalTime.now(),
                 ProcessType.CHECKWEATHER.toString(),
-                UUID.randomUUID().toString(),
                 FeatureType.BASICONLYHTTP.toString()
         );
 
-        String weather =  restTemplate.getForObject(url.concat(location).concat("?unitGroup=metric&key=").concat(key), String.class);
+        String weather = restTemplate.getForObject(url.concat(location).concat("?unitGroup=metric&key=").concat(key), String.class);
 
         process.setFinishDate(LocalTime.now());
         process.setDataSize(weather.length());
