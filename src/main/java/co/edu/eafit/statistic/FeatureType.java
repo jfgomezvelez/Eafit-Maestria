@@ -2,7 +2,7 @@ package co.edu.eafit.statistic;
 
 public enum FeatureType {
 
-    BASICONLYHTTP("BasicOnlyHTTP");
+    BASICRabbitMQMessagePattern("BasicRabbitMQMessagePattern");
 
     private final String type;
 
