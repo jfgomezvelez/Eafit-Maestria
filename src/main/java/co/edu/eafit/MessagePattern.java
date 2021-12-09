@@ -1,9 +1,6 @@
 package co.edu.eafit;
 
-import co.edu.eafit.mongodb.ProcessData;
 import co.edu.eafit.mongodb.StatisticRepository;
-import co.edu.eafit.statistic.FeatureType;
-import co.edu.eafit.statistic.ProcessType;
 import lombok.extern.java.Log;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
@@ -22,7 +19,6 @@ import java.time.LocalTime;
 @Log
 @Component
 public class MessagePattern {
-
     @Autowired
     private StatisticRepository statisticRepository;
 
@@ -49,13 +45,7 @@ public class MessagePattern {
         log.info(result);
     }
 
-    public void send(String location) {
-
-        ProcessData process = new ProcessData(
-                LocalTime.now(),
-                ProcessType.CHECKWEATHER.toString(),
-                FeatureType.BASICRabbitMQMessagePattern.toString()
-        );
+    public void send(String location, String id) {
 
         log.info("Enviando evento "
                 .concat(location)
@@ -63,19 +53,17 @@ public class MessagePattern {
                 .concat(":")
                 .concat("weather.response ")
                 .concat("messageId")
-                .concat(process.getId())
-        );
+                .concat(id));
+
 
         String data1 = "{\"location\":\"" + location + "\"}";
         byte[] data = data1.getBytes(StandardCharsets.UTF_8);
 
         MessageProperties messageProperties = new MessageProperties();
-        messageProperties.setMessageId(process.getId());
+        messageProperties.setMessageId(id);
 
         Message message = new Message(data, messageProperties);
 
         rabbitTemplate.convertAndSend("weather.exchange", "weather.request", message);
-
-        statisticRepository.save(process);
     }
 }
