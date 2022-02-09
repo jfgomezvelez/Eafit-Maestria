@@ -13,7 +13,7 @@ import java.time.LocalTime;
 
 @RestController
 @Log
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/service")
 public class WeatherController {
 
     @Autowired
