@@ -22,3 +22,6 @@ spring:
 visualcrossing:
   url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
   key: ${VISUAL_KEY}
+process:
+  concurrency: "1-1"
+  type: "ACK"

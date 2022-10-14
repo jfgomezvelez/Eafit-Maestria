@@ -1,6 +1,7 @@
 package co.edu.eafit;
 
 import co.edu.eafit.mongodb.StatisticRepository;
+import com.rabbitmq.client.Channel;
 import lombok.extern.java.Log;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.core.Message;
@@ -11,8 +12,10 @@ import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
 
@@ -25,38 +28,48 @@ public class MessagePattern {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
-    @RabbitListener(bindings = @QueueBinding(value = @Queue(
-            value = "weather.response.queue"
-    ),
-            exchange = @Exchange(value = "weather.exchange", type = ExchangeTypes.TOPIC),
-            key = "weather.response")
-    )
-    public void receive(Message message) {
+    @Value("${spring.rabbitmq.listener.simple.acknowledge-mode}")
+    private String mode;
+
+    @RabbitListener(queues = "weather.service.em.queue", concurrency = "${process.concurrency}")
+    public void receive(Message message, Channel channel) {
         String data = new String(message.getBody());
         log.info("Recibiendo mensaje ".concat(data).concat(" messageId ").concat(message.getMessageProperties().getMessageId()));
-        String result = statisticRepository.findById(message.getMessageProperties().getMessageId())
+        boolean result = statisticRepository.findById(message.getMessageProperties().getMessageId())
                 .map(processData -> {
                     processData.setFinishDate(LocalTime.now());
                     processData.setDataSize(data.length());
                     statisticRepository.save(processData);
-                    return "process actualizado";
+                    return true;
                 })
-                .orElse("No existe messageId");
-        log.info(result);
+                .orElse(false);
+        log.info("resultado de la actualizacion: " + result);
+
+        if("manual".equals(mode)){
+            try {
+                if (result) {
+                    channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+                } else {
+                    channel.basicNack(message.getMessageProperties().getDeliveryTag(), false, false);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void send(String location, String id) {
+    public void send(Integer messageType, String id) {
 
         log.info("Enviando evento "
-                .concat(location)
-                .concat(" a ").concat("weather.response.exchange")
-                .concat(":")
-                .concat("weather.response ")
+                .concat(String.valueOf(messageType))
+                .concat(" a ").concat("weather.service.cm.exchange  ")
+                .concat(": ")
+                .concat("weather.service.queue ")
                 .concat("messageId")
                 .concat(id));
 
 
-        String data1 = "{\"location\":\"" + location + "\"}";
+        String data1 = "{\"messageType\": " + messageType + "}";
         byte[] data = data1.getBytes(StandardCharsets.UTF_8);
 
         MessageProperties messageProperties = new MessageProperties();
@@ -64,6 +77,6 @@ public class MessagePattern {
 
         Message message = new Message(data, messageProperties);
 
-        rabbitTemplate.convertAndSend("weather.exchange", "weather.request", message);
+        rabbitTemplate.convertAndSend("weather.api.em.exchange ", message);
     }
 }
