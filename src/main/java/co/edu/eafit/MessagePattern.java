@@ -31,7 +31,11 @@ public class MessagePattern {
     @Value("${spring.rabbitmq.listener.simple.acknowledge-mode}")
     private String mode;
 
-    @RabbitListener(queues = "weather.service.cm.queue", concurrency = "${process.concurrency}")
+    @RabbitListener(bindings = @QueueBinding(value = @Queue(value = "weather.service.cm.queue"),
+            exchange = @Exchange(value = "weather.service.cm.exchange"),
+            key = "weather.service.cm.routingkey"),
+            concurrency = "${process.concurrency}"
+    )
     public void receive(Message message, Channel channel) {
         String data = new String(message.getBody());
         log.info("Recibiendo mensaje ".concat(data).concat(" messageId ").concat(message.getMessageProperties().getMessageId()));
