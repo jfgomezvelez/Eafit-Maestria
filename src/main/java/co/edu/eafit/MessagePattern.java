@@ -81,6 +81,6 @@ public class MessagePattern {
 
         Message message = new Message(data, messageProperties);
 
-        rabbitTemplate.convertAndSend("weather.api.cm.exchange ", message);
+        rabbitTemplate.convertAndSend("weather.api.cm.exchange","weather.api.cm.routingkey", message);
     }
 }
