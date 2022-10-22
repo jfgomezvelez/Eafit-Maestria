@@ -28,4 +28,4 @@ visualcrossing:
   key: ${VISUAL_KEY}
 process:
   concurrency: "1-1"
-  type: "ACK"
+  type: "ACK-Manual" #"ACK-Manual, ACK-Auto, ACK-Manual-And-Concurrency, ACK-Manual-And-Prefetch, ACK-Auto-And-Concurrency, ACK-Auto-And-Prefetch"
