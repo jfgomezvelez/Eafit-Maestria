@@ -2,7 +2,7 @@ package co.edu.eafit.statistic;
 
 public enum FeatureType {
 
-    EVENTMESSAGE("Event-Message");
+    EVENTMESSAGE("Command-Message");
 
     private final String type;
 
