@@ -19,6 +19,10 @@ spring:
     password: guest
     username: guest
     virtual_host: /
+    listener:
+      simple:
+        acknowledge-mode: manual
+        prefetch: 0
 visualcrossing:
   url: "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
   key: ${VISUAL_KEY}
