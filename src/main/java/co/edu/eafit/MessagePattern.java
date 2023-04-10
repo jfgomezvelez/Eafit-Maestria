@@ -63,9 +63,9 @@ public class MessagePattern {
 
         log.info("Enviando evento "
                 .concat(String.valueOf(messageType))
-                .concat(" a ").concat("weather.service.cm.exchange  ")
+                .concat(" a ").concat("weather.api.em.exchange ")
                 .concat(": ")
-                .concat("weather.service.queue ")
+                .concat("weather.service.em.queue ")
                 .concat("messageId")
                 .concat(id));
 
@@ -78,6 +78,6 @@ public class MessagePattern {
 
         Message message = new Message(data, messageProperties);
 
-        rabbitTemplate.convertAndSend("weather.api.em.exchange ", message);
+        rabbitTemplate.convertAndSend("weather.api.em.exchange", message);
     }
 }
