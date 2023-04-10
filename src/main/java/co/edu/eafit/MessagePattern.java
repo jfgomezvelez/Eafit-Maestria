@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalTime;
+import java.util.Locale;
 
 @Log
 @Component
@@ -49,7 +50,7 @@ public class MessagePattern {
                 .orElse(false);
         log.info("resultado de la actualizacion: " + result);
 
-        if("manual".equals(mode)){
+        if("manual".toUpperCase(Locale.ROOT).equals(mode.toUpperCase())){
             try {
                 if (result) {
                     channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
