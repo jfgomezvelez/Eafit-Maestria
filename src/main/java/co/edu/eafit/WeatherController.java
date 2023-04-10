@@ -30,7 +30,7 @@ public class WeatherController {
         ProcessData process = new ProcessData(
                 LocalTime.now(),
                 processType,
-                FeatureType.COMMANDMESSAGE.toString().concat("-").concat(processType)
+                processType
         );
 
         statisticRepository.save(process);
