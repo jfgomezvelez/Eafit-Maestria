@@ -30,7 +30,7 @@ public class WeatherController {
         ProcessData process = new ProcessData(
                 LocalTime.now(),
                 processType,
-                FeatureType.EVENTMESSAGE.toString()
+                processType
         );
 
         statisticRepository.save(process);
